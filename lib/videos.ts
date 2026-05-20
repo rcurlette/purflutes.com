@@ -38,27 +38,72 @@ export type Video = {
  *   - For a poster image, drop a still in /public/videos and set `poster`.
  */
 export const videos: Video[] = [
-  // Example entries — replace these with your real videos.
-  // {
-  //   slug: "morning-sit-cedar",
-  //   title: "Morning sit · cedar in A",
-  //   description:
-  //     "A short improvisation on the cedar A-minor flute, recorded just after sunrise in the Rhodopes.",
-  //   poster: "/videos/morning-sit.jpg",
-  //   duration: "4:12",
-  //   date: "2026-04-10",
-  //   featured: true,
-  //   source: { type: "vimeo", id: "76979871" },
-  // },
-  // {
-  //   slug: "workshop-tour",
-  //   title: "Inside the workshop",
-  //   description: "A walk through Radenko's bench in the mountains.",
-  //   poster: "/videos/workshop-tour.jpg",
-  //   duration: "2:38",
-  //   date: "2026-03-22",
-  //   source: { type: "local", src: "/videos/workshop-tour.mp4" },
-  // },
+  {
+    slug: "field-recording-01",
+    title: "Field recording · 01",
+    description: "A short flute moment captured on location.",
+    date: "2026-05-20",
+    featured: true,
+    source: { type: "vimeo", id: "1192796089" },
+  },
+  {
+    slug: "field-recording-02",
+    title: "Field recording · 02",
+    description: "A short flute moment captured on location.",
+    date: "2026-05-20",
+    featured: true,
+    source: { type: "vimeo", id: "1192796090" },
+  },
+  {
+    slug: "field-recording-03",
+    title: "Field recording · 03",
+    description: "A short flute moment captured on location.",
+    date: "2026-05-20",
+    featured: true,
+    source: { type: "vimeo", id: "1192796088" },
+  },
+  {
+    slug: "field-recording-04",
+    title: "Field recording · 04",
+    description: "A short flute moment captured on location.",
+    date: "2026-05-19",
+    source: { type: "vimeo", id: "1192796086" },
+  },
+  {
+    slug: "field-recording-05",
+    title: "Field recording · 05",
+    description: "A short flute moment captured on location.",
+    date: "2026-05-19",
+    source: { type: "vimeo", id: "1192796085" },
+  },
+  {
+    slug: "field-recording-06",
+    title: "Field recording · 06",
+    description: "A short flute moment captured on location.",
+    date: "2026-05-18",
+    source: { type: "vimeo", id: "1192794038" },
+  },
+  {
+    slug: "field-recording-07",
+    title: "Field recording · 07",
+    description: "A short flute moment captured on location.",
+    date: "2026-05-18",
+    source: { type: "vimeo", id: "1192794037" },
+  },
+  {
+    slug: "field-recording-08",
+    title: "Field recording · 08",
+    description: "A short flute moment captured on location.",
+    date: "2026-05-18",
+    source: { type: "vimeo", id: "1192794036" },
+  },
+  {
+    slug: "field-recording-09",
+    title: "Field recording · 09",
+    description: "A short flute moment captured on location.",
+    date: "2026-05-18",
+    source: { type: "vimeo", id: "1192794033" },
+  },
 ]
 
 export function getAllVideos(): Video[] {
