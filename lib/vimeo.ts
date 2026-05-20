@@ -37,7 +37,7 @@ export const fetchVimeoMeta = cache(async (id: string): Promise<VimeoMeta> => {
   try {
     const res = await fetch(
       `https://vimeo.com/api/oembed.json?url=${encodeURIComponent(`https://vimeo.com/${id}`)}&width=1280`,
-      { next: { revalidate: 60 * 60 * 24 } },
+      { next: { revalidate: 60 * 5 } },
     )
     if (!res.ok) return {}
     const data = (await res.json()) as VimeoOEmbed
