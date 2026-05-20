@@ -3,7 +3,7 @@ import Link from "next/link"
 import { Film, Youtube } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { VideoCard } from "@/components/site/video-card"
-import { getAllVideos } from "@/lib/videos"
+import { getAllVideosEnriched } from "@/lib/videos"
 
 export const metadata: Metadata = {
   title: "Videos",
@@ -11,8 +11,8 @@ export const metadata: Metadata = {
     "Watch PUR Flutes — improvisations, ceremony pieces, and moments from the workshop in the Bulgarian Rhodopes.",
 }
 
-export default function VideosPage() {
-  const videos = getAllVideos()
+export default async function VideosPage() {
+  const videos = await getAllVideosEnriched()
 
   return (
     <div className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">

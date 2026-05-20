@@ -37,6 +37,8 @@ export type Video = {
  *     source: { type: "local", src: "/videos/<filename>.mp4" }
  *   - For a poster image, drop a still in /public/videos and set `poster`.
  */
+import { fetchVimeoMeta } from "@/lib/vimeo"
+
 export const videos: Video[] = [
   {
     slug: "field-recording-01",
@@ -118,4 +120,29 @@ export function getFeaturedVideos(limit = 3): Video[] {
 
 export function getVideoBySlug(slug: string): Video | undefined {
   return videos.find((v) => v.slug === slug)
+}
+
+/**
+ * Enrich a video with live Vimeo metadata (title, description, thumbnail,
+ * duration). Falls back to the values defined in this file when the oEmbed
+ * call fails or the video is not hosted on Vimeo.
+ */
+export async function enrichVideo(video: Video): Promise<Video> {
+  if (video.source.type !== "vimeo") return video
+  const meta = await fetchVimeoMeta(video.source.id)
+  return {
+    ...video,
+    title: meta.title ?? video.title,
+    description: meta.description ?? video.description,
+    poster: video.poster ?? meta.thumbnail,
+    duration: video.duration ?? meta.duration,
+  }
+}
+
+export async function getAllVideosEnriched(): Promise<Video[]> {
+  return Promise.all(getAllVideos().map(enrichVideo))
+}
+
+export async function getFeaturedVideosEnriched(limit = 3): Promise<Video[]> {
+  return Promise.all(getFeaturedVideos(limit).map(enrichVideo))
 }

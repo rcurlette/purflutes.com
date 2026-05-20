@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button"
 import { SignupForm } from "@/components/site/signup-form"
 import { VideoCard } from "@/components/site/video-card"
 import { flutes } from "@/lib/flutes"
-import { getFeaturedVideos } from "@/lib/videos"
+import { getFeaturedVideosEnriched } from "@/lib/videos"
 
 export const metadata: Metadata = {
   title: "Sound & Gallery",
@@ -14,8 +14,8 @@ export const metadata: Metadata = {
     "Listen to PUR Flutes — sound samples, recordings, and images of each instrument in the collection.",
 }
 
-export default function GalleryPage() {
-  const featuredVideos = getFeaturedVideos(3)
+export default async function GalleryPage() {
+  const featuredVideos = await getFeaturedVideosEnriched(3)
   return (
     <div className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
       <header className="max-w-3xl">
