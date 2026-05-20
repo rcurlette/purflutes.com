@@ -75,7 +75,7 @@ export const flutes: Flute[] = [
     features: [
       "Pentatonic minor scale",
       "6 finger holes",
-      "Hand-carved bear totem block",
+      "Hand-carved",
       "Shellac finish",
   
     ],
