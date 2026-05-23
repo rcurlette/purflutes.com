@@ -10,6 +10,19 @@ export type Partner = {
 
 export const partners: Partner[] = [
   {
+    slug: "purifier-crafts",
+    name: "Purifier Crafts",
+    location: "Bulgaria",
+    url: "https://www.instagram.com/purifier.crafts/",
+    image: {
+      src: "/partners/purifier-crafts.jpg",
+      alt: "Purifier Crafts — artisan woodcraft studio with handmade wooden instruments, tools, and natural materials in a workshop setting",
+    },
+    blurb:
+      "A collective of master craftspeople dedicated to the art of flute-making and wooden instrument creation. Where tradition meets precision in the mountains.",
+    tags: ["Craftsmanship", "Woodwork", "Handmade"],
+  },
+  {
     slug: "savaya-tribe",
     name: "Savaya Tribe",
     location: "Bulgarian mountains",
