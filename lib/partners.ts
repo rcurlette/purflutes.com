@@ -10,6 +10,19 @@ export type Partner = {
 
 export const partners: Partner[] = [
   {
+    slug: "the-purifier",
+    name: "Пречистващата / The Purifier",
+    location: "Bulgaria",
+    url: "https://www.facebook.com/p/%D0%9F%D1%80%D0%B5%D1%87%D0%B8%D1%81%D1%82%D0%B2%D0%B0%D1%89%D0%B0%D1%82%D0%B0-The-Purifier-100093921861044/",
+    image: {
+      src: "/partners/the-purifier.jpg",
+      alt: "The Purifier — sacred space with ceremonial instruments, candles, and natural elements in warm contemplative lighting",
+    },
+    blurb:
+      "A space for ceremony, sound healing, and spiritual practice. Bringing ancient traditions and purifying rituals to those seeking deeper connection.",
+    tags: ["Ceremony", "Sound healing", "Spiritual"],
+  },
+  {
     slug: "purifier-crafts",
     name: "Purifier Crafts",
     location: "Bulgaria",
