@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import Image from "next/image"
 import Link from "next/link"
-import { Headphones, Youtube, Instagram, ArrowUpRight, Film } from "lucide-react"
+import { Headphones, Youtube, Instagram, ArrowUpRight, Film, Hammer2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { SignupForm } from "@/components/site/signup-form"
 import { VideoCard } from "@/components/site/video-card"
@@ -94,6 +94,48 @@ export default async function GalleryPage() {
           </div>
         </section>
       )}
+
+      {/* Makers at work */}
+      <section aria-labelledby="makers-heading" className="mt-20">
+        <div className="flex items-center gap-3">
+          <Hammer2 className="h-5 w-5 text-primary" aria-hidden="true" />
+          <h2 id="makers-heading" className="font-serif text-3xl text-foreground">
+            The makers
+          </h2>
+        </div>
+        <div className="mt-8 grid gap-4 sm:grid-cols-2">
+          <figure className="relative aspect-[3/4] overflow-hidden rounded-lg border border-border/60 bg-secondary">
+            <Image
+              src="/gallery/robert-purifier.jpg"
+              alt="Robert in his workshop, crafting a wooden flute with focused attention"
+              fill
+              sizes="(min-width: 640px) 50vw, 100vw"
+              className="object-cover"
+            />
+            <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-background/95 via-background/40 to-transparent p-6">
+              <p className="font-serif text-sm uppercase tracking-[0.2em] text-primary">Robert</p>
+              <p className="mt-1 text-sm leading-relaxed text-foreground/90">
+                At work in the studio, shaping wood into instruments that carry the breath.
+              </p>
+            </figcaption>
+          </figure>
+          <figure className="relative aspect-[3/4] overflow-hidden rounded-lg border border-border/60 bg-secondary">
+            <Image
+              src="/gallery/radenko-purifier.jpg"
+              alt="Radenko in his workshop, working on a wooden piece with precision tools around him"
+              fill
+              sizes="(min-width: 640px) 50vw, 100vw"
+              className="object-cover"
+            />
+            <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-background/95 via-background/40 to-transparent p-6">
+              <p className="font-serif text-sm uppercase tracking-[0.2em] text-primary">Radenko</p>
+              <p className="mt-1 text-sm leading-relaxed text-foreground/90">
+                In the Rhodope mountains, where tradition meets craftsmanship.
+              </p>
+            </figcaption>
+          </figure>
+        </div>
+      </section>
 
       {/* Listen & follow */}
       <section className="mt-20">
