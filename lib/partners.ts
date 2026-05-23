@@ -10,6 +10,19 @@ export type Partner = {
 
 export const partners: Partner[] = [
   {
+    slug: "angus-ross",
+    name: "Angus Ross",
+    location: "Perthshire, Scotland",
+    url: "https://www.angusross.co.uk/",
+    image: {
+      src: "/partners/angus-ross.jpg",
+      alt: "Angus Ross — bespoke steam-bent Scottish oak furniture crafted in Perthshire, sculptural wooden pieces with organic curves and fine joinery",
+    },
+    blurb:
+      "Designer and maker of exquisite bespoke furniture hand-crafted from Perthshire woodland timber. Angus's mastery of steam-bending oak — shaping living wood into sculptural, enduring forms — shares a deep kinship with the craft behind our flutes.",
+    tags: ["Woodcraft", "Scotland", "Bespoke furniture"],
+  },
+  {
     slug: "the-purifier",
     name: "Пречистващата / The Purifier",
     location: "Bulgaria",
