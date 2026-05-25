@@ -1,5 +1,3 @@
-import { sanityFetch } from "@/lib/sanity/client"
-
 export type GalleryGroupKey = "flutes" | "workshop" | "makers"
 
 export type GalleryImage = {
@@ -24,37 +22,12 @@ export const GALLERY_GROUP_LABELS: Record<GalleryGroupKey, string> = {
   makers: "The makers",
 }
 
-const GALLERY_GROUP_ORDER: GalleryGroupKey[] = ["flutes", "workshop", "makers"]
-
-const GALLERY_PROJECTION = /* groq */ `{
-  src,
-  alt,
-  caption,
-  href,
-  wide,
-  tall,
-  "group": group
-}`
-
 export async function getAllGalleryImages(): Promise<GalleryImage[]> {
-  return sanityFetch<GalleryImage[]>(
-    /* groq */ `*[_type == "galleryImage"] | order(group asc, coalesce(order, 9999) asc) ${GALLERY_PROJECTION}`,
-    {},
-    { tags: ["galleryImage"] },
-  )
+  // TODO: Implement data fetching from your preferred source
+  return []
 }
 
 export async function getGalleryGroups(): Promise<GalleryGroup[]> {
-  const all = await getAllGalleryImages()
-  const byGroup = new Map<GalleryGroupKey, GalleryImage[]>()
-  for (const img of all) {
-    const list = byGroup.get(img.group) ?? []
-    list.push(img)
-    byGroup.set(img.group, list)
-  }
-  return GALLERY_GROUP_ORDER.filter((key) => byGroup.has(key)).map((key) => ({
-    key,
-    label: GALLERY_GROUP_LABELS[key],
-    images: byGroup.get(key) ?? [],
-  }))
+  // TODO: Implement data fetching from your preferred source
+  return []
 }

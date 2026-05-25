@@ -1,5 +1,3 @@
-import { sanityFetch } from "@/lib/sanity/client"
-
 export type FluteImage = {
   src: string
   alt: string
@@ -24,43 +22,17 @@ export type Flute = {
   youtubeId?: string
 }
 
-const FLUTE_PROJECTION = /* groq */ `{
-  "slug": slug.current,
-  name,
-  key,
-  tuning,
-  wood,
-  length,
-  priceEUR,
-  status,
-  shortDescription,
-  longDescription,
-  features,
-  "images": images[]{ src, alt },
-  audioSrc,
-  youtubeId
-}`
-
 export async function getAllFlutes(): Promise<Flute[]> {
-  return sanityFetch<Flute[]>(
-    /* groq */ `*[_type == "flute"] | order(coalesce(order, 9999) asc, name asc) ${FLUTE_PROJECTION}`,
-    {},
-    { tags: ["flute"] },
-  )
+  // TODO: Implement data fetching from your preferred source
+  return []
 }
 
 export async function getFluteBySlug(slug: string): Promise<Flute | null> {
-  return sanityFetch<Flute | null>(
-    /* groq */ `*[_type == "flute" && slug.current == $slug][0] ${FLUTE_PROJECTION}`,
-    { slug },
-    { tags: ["flute", `flute:${slug}`] },
-  )
+  // TODO: Implement data fetching from your preferred source
+  return null
 }
 
 export async function getFluteSlugs(): Promise<string[]> {
-  return sanityFetch<string[]>(
-    /* groq */ `*[_type == "flute" && defined(slug.current)].slug.current`,
-    {},
-    { tags: ["flute"] },
-  )
+  // TODO: Implement data fetching from your preferred source
+  return []
 }

@@ -2,8 +2,7 @@ import { SiteHeader } from "@/components/site/site-header"
 import { SiteFooter } from "@/components/site/site-footer"
 
 /**
- * Layout for all marketing pages. The embedded Sanity Studio at /studio
- * lives outside this group so it renders without the site chrome.
+ * Layout for all marketing pages.
  */
 export default function SiteLayout({
   children,
