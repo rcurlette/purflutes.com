@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import { FluteCard } from "@/components/site/flute-card"
-import { flutes } from "@/lib/flutes"
+import { getAllFlutes } from "@/lib/flutes"
 
 export const metadata: Metadata = {
   title: "Flutes for Sale",
@@ -8,7 +8,8 @@ export const metadata: Metadata = {
     "Browse handcrafted Native American style flutes by PUR Flutes. Each instrument is hand-shaped in the Bulgarian Rhodope mountains and tuned for meditation, breathwork, and ceremony.",
 }
 
-export default function ShopPage() {
+export default async function ShopPage() {
+  const flutes = await getAllFlutes()
   return (
     <div className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
       <header className="max-w-3xl">

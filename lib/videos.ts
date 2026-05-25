@@ -1,131 +1,101 @@
+import { fetchVimeoMeta } from "@/lib/vimeo"
+import { sanityFetch } from "@/lib/sanity/client"
+
 export type VideoSource =
-  | {
-      type: "vimeo"
-      /** The numeric Vimeo video ID, e.g. "76979871" from vimeo.com/76979871 */
-      id: string
-    }
-  | {
-      type: "local"
-      /** Path under /public, e.g. "/videos/morning-sit.mp4" */
-      src: string
-      /** Optional MIME type, defaults to "video/mp4" */
-      mimeType?: string
-    }
+  | { type: "vimeo"; id: string }
+  | { type: "local"; src: string; mimeType?: string }
 
 export type Video = {
   slug: string
   title: string
   description: string
-  /** Optional poster image path under /public, e.g. "/videos/morning-sit.jpg" */
   poster?: string
-  /** Optional duration string for display, e.g. "4:12" */
   duration?: string
-  /** ISO date string, used for sorting (newest first) */
   date: string
-  /** Mark as featured to surface on the Sound page */
   featured?: boolean
   source: VideoSource
 }
 
-/**
- * Robert's video library.
- *
- * To add a new video:
- *   - For Vimeo: copy the numeric ID from the share URL (vimeo.com/<id>)
- *     and add an entry with source: { type: "vimeo", id: "..." }
- *   - For a local file: drop the .mp4 in /public/videos and use
- *     source: { type: "local", src: "/videos/<filename>.mp4" }
- *   - For a poster image, drop a still in /public/videos and set `poster`.
- */
-import { fetchVimeoMeta } from "@/lib/vimeo"
-
-export const videos: Video[] = [
-  {
-    slug: "field-recording-01",
-    title: "Field recording · 01",
-    description: "A short flute moment captured on location.",
-    date: "2026-05-20",
-    featured: true,
-    source: { type: "vimeo", id: "1192796089" },
-  },
-  {
-    slug: "field-recording-02",
-    title: "Field recording · 02",
-    description: "A short flute moment captured on location.",
-    date: "2026-05-20",
-    featured: true,
-    source: { type: "vimeo", id: "1192796090" },
-  },
-  {
-    slug: "field-recording-03",
-    title: "Field recording · 03",
-    description: "A short flute moment captured on location.",
-    date: "2026-05-20",
-    featured: true,
-    source: { type: "vimeo", id: "1192796088" },
-  },
-  {
-    slug: "field-recording-04",
-    title: "Field recording · 04",
-    description: "A short flute moment captured on location.",
-    date: "2026-05-19",
-    source: { type: "vimeo", id: "1192796086" },
-  },
-  {
-    slug: "field-recording-05",
-    title: "Field recording · 05",
-    description: "A short flute moment captured on location.",
-    date: "2026-05-19",
-    source: { type: "vimeo", id: "1192796085" },
-  },
-  {
-    slug: "field-recording-06",
-    title: "Field recording · 06",
-    description: "A short flute moment captured on location.",
-    date: "2026-05-18",
-    source: { type: "vimeo", id: "1192794038" },
-  },
-  {
-    slug: "field-recording-07",
-    title: "Field recording · 07",
-    description: "A short flute moment captured on location.",
-    date: "2026-05-18",
-    source: { type: "vimeo", id: "1192794037" },
-  },
-  {
-    slug: "field-recording-08",
-    title: "Field recording · 08",
-    description: "A short flute moment captured on location.",
-    date: "2026-05-18",
-    source: { type: "vimeo", id: "1192794036" },
-  },
-  {
-    slug: "field-recording-09",
-    title: "Field recording · 09",
-    description: "A short flute moment captured on location.",
-    date: "2026-05-18",
-    source: { type: "vimeo", id: "1192794033" },
-  },
-]
-
-export function getAllVideos(): Video[] {
-  return [...videos].sort((a, b) => (a.date < b.date ? 1 : -1))
+type VideoRow = {
+  slug: string
+  title: string
+  description: string
+  poster?: string | null
+  duration?: string | null
+  date: string
+  featured?: boolean | null
+  sourceType: "vimeo" | "local"
+  vimeoId?: string | null
+  localSrc?: string | null
+  localMimeType?: string | null
 }
 
-export function getFeaturedVideos(limit = 3): Video[] {
-  return getAllVideos()
-    .filter((v) => v.featured)
-    .slice(0, limit)
+const VIDEO_PROJECTION = /* groq */ `{
+  "slug": slug.current,
+  title,
+  description,
+  poster,
+  duration,
+  date,
+  featured,
+  sourceType,
+  vimeoId,
+  localSrc,
+  localMimeType
+}`
+
+function rowToVideo(row: VideoRow): Video {
+  const source: VideoSource =
+    row.sourceType === "local"
+      ? {
+          type: "local",
+          src: row.localSrc ?? "",
+          mimeType: row.localMimeType ?? undefined,
+        }
+      : { type: "vimeo", id: row.vimeoId ?? "" }
+
+  return {
+    slug: row.slug,
+    title: row.title,
+    description: row.description,
+    poster: row.poster ?? undefined,
+    duration: row.duration ?? undefined,
+    date: row.date,
+    featured: row.featured ?? false,
+    source,
+  }
 }
 
-export function getVideoBySlug(slug: string): Video | undefined {
-  return videos.find((v) => v.slug === slug)
+export async function getAllVideos(): Promise<Video[]> {
+  const rows = await sanityFetch<VideoRow[]>(
+    /* groq */ `*[_type == "video"] | order(date desc) ${VIDEO_PROJECTION}`,
+    {},
+    { tags: ["video"] },
+  )
+  return rows.map(rowToVideo)
+}
+
+export async function getFeaturedVideos(limit = 3): Promise<Video[]> {
+  const rows = await sanityFetch<VideoRow[]>(
+    /* groq */ `*[_type == "video" && featured == true] | order(date desc)[0...$limit] ${VIDEO_PROJECTION}`,
+    { limit },
+    { tags: ["video"] },
+  )
+  return rows.map(rowToVideo)
+}
+
+export async function getVideoBySlug(slug: string): Promise<Video | null> {
+  const row = await sanityFetch<VideoRow | null>(
+    /* groq */ `*[_type == "video" && slug.current == $slug][0] ${VIDEO_PROJECTION}`,
+    { slug },
+    { tags: ["video", `video:${slug}`] },
+  )
+  return row ? rowToVideo(row) : null
 }
 
 /**
- * Enrich a video with live Vimeo metadata (title, description, thumbnail,
- * duration). Falls back to the values defined in this file when the oEmbed
- * call fails or the video is not hosted on Vimeo.
+ * Enrich a video with live Vimeo metadata (title, description, thumbnail, duration).
+ * Falls back to the values stored in Sanity when oEmbed fails or the video is local.
  */
 export async function enrichVideo(video: Video): Promise<Video> {
   if (video.source.type !== "vimeo") return video
@@ -140,9 +110,11 @@ export async function enrichVideo(video: Video): Promise<Video> {
 }
 
 export async function getAllVideosEnriched(): Promise<Video[]> {
-  return Promise.all(getAllVideos().map(enrichVideo))
+  const all = await getAllVideos()
+  return Promise.all(all.map(enrichVideo))
 }
 
 export async function getFeaturedVideosEnriched(limit = 3): Promise<Video[]> {
-  return Promise.all(getFeaturedVideos(limit).map(enrichVideo))
+  const featured = await getFeaturedVideos(limit)
+  return Promise.all(featured.map(enrichVideo))
 }

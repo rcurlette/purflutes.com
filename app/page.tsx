@@ -4,10 +4,11 @@ import { ArrowRight, Wind, Heart, Sparkles } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { FluteCard } from "@/components/site/flute-card"
 import { SignupForm } from "@/components/site/signup-form"
-import { flutes } from "@/lib/flutes"
+import { getAllFlutes } from "@/lib/flutes"
 
-export default function HomePage() {
-  const featuredFlutes = flutes.slice(0, 3)
+export default async function HomePage() {
+  const allFlutes = await getAllFlutes()
+  const featuredFlutes = allFlutes.slice(0, 3)
 
   return (
     <>

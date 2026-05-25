@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import Image from "next/image"
 import { ArrowUpRight, Handshake } from "lucide-react"
-import { partners } from "@/lib/partners"
+import { getAllPartners } from "@/lib/partners"
 
 export const metadata: Metadata = {
   title: "Partners · PUR Flutes",
@@ -9,7 +9,8 @@ export const metadata: Metadata = {
     "Spaces and communities we play, gather, and create with — retreats, sound healing studios, and mountain homes.",
 }
 
-export default function PartnersPage() {
+export default async function PartnersPage() {
+  const partners = await getAllPartners()
   return (
     <main className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
       <header className="max-w-2xl">

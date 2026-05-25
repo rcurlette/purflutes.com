@@ -7,7 +7,7 @@ import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
 import { InquiryForm } from "@/components/site/inquiry-form"
 import { FluteImageCarousel } from "@/components/site/flute-image-carousel"
-import { flutes, getFluteBySlug, type Flute } from "@/lib/flutes"
+import { getFluteBySlug, getFluteSlugs, type Flute } from "@/lib/flutes"
 
 const statusLabel: Record<Flute["status"], string> = {
   available: "Available now",
@@ -16,7 +16,8 @@ const statusLabel: Record<Flute["status"], string> = {
 }
 
 export async function generateStaticParams() {
-  return flutes.map((flute) => ({ slug: flute.slug }))
+  const slugs = await getFluteSlugs()
+  return slugs.map((slug) => ({ slug }))
 }
 
 export async function generateMetadata({
@@ -25,7 +26,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>
 }): Promise<Metadata> {
   const { slug } = await params
-  const flute = getFluteBySlug(slug)
+  const flute = await getFluteBySlug(slug)
   if (!flute) return { title: "Flute not found" }
   return {
     title: `${flute.name} — ${flute.key} flute`,
@@ -39,7 +40,7 @@ export default async function FluteDetailPage({
   params: Promise<{ slug: string }>
 }) {
   const { slug } = await params
-  const flute = getFluteBySlug(slug)
+  const flute = await getFluteBySlug(slug)
   if (!flute) notFound()
 
   // Resolve the image list: use curated images array if available, else fall back to the generated slug image
