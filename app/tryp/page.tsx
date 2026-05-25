@@ -12,8 +12,8 @@ export const metadata: Metadata = {
     "Meet PUR Flutes at TRYP EXPO Berlin 2026 where psychedelics, science, music, and wellness meet. Try our flutes, take home an event guide, and stay in the circle.",
 }
 
-export default function TrypPage() {
-  const event = getEventBySlug("tryp-expo-berlin-2026")
+export default async function TrypPage() {
+  const event = await getEventBySlug("tryp-expo-berlin-2026")
 
   return (
     <>
