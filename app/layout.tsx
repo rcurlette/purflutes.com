@@ -2,8 +2,6 @@ import type { Metadata, Viewport } from "next"
 import { Geist, Cormorant_Garamond } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import { Toaster } from "@/components/ui/sonner"
-import { SiteHeader } from "@/components/site/site-header"
-import { SiteFooter } from "@/components/site/site-footer"
 import "./globals.css"
 
 const geist = Geist({
@@ -60,9 +58,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`dark bg-background ${geist.variable} ${cormorant.variable}`}>
       <body className="font-sans antialiased min-h-screen flex flex-col">
-        <SiteHeader />
-        <main className="flex-1">{children}</main>
-        <SiteFooter />
+        {children}
         <Toaster richColors position="top-center" />
         {process.env.NODE_ENV === "production" && <Analytics />}
       </body>
