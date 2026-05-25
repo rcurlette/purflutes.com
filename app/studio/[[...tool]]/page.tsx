@@ -1,9 +1,3 @@
-"use client"
-
-/**
- * Embedded Sanity Studio mounted at /studio.
- * Edit content from the deployed site without leaving the app.
- */
 import { NextStudio } from "next-sanity/studio"
 import config from "../../../sanity.config"
 
