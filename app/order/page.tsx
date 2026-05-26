@@ -23,11 +23,11 @@ export default function OrderPage() {
           to confirm your wood, key, and timeline before we begin carving.
         </p>
         <div className="mt-4 flex flex-wrap gap-6 text-sm text-muted-foreground">
-          <span>Walking Stick Flute from $800</span>
+          <span>Walking Stick Flute from €800</span>
           <span className="text-border">·</span>
-          <span>Drone Flute from $500</span>
+          <span>Drone Flute from €500</span>
           <span className="text-border">·</span>
-          <span>Classic Flute from $400</span>
+          <span>River Song from €300</span>
         </div>
       </header>
 
