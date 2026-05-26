@@ -48,11 +48,6 @@ export function SiteFooter() {
                   Partners
                 </Link>
               </li>
-              <li>
-                <Link href="/tryp" className="text-foreground/80 hover:text-primary">
-                  TRYP Berlin 2026
-                </Link>
-              </li>
             </ul>
           </div>
 

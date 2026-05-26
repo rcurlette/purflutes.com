@@ -44,7 +44,7 @@ export default function HomePage() {
               </Link>
             </Button>
             <Button asChild size="lg" variant="outline" className="font-medium">
-              <Link href="/tryp">Meet us at TRYP Berlin</Link>
+              <Link href="/about">Learn the story</Link>
             </Button>
           </div>
         </div>

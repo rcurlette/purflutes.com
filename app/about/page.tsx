@@ -46,25 +46,25 @@ export default function AboutPage() {
         </div>
 
         <div className="space-y-6 text-pretty leading-relaxed text-foreground/90">
-          <p>
-            Robert came to the flute later in life, after years working in code, technology, and the
-            quieter end of music. The first flute he played was a borrowed cedar instrument at a
-            breathwork circle. He didn&apos;t put it down.
-          </p>
-          <p>
-            What began as a personal practice grew into a partnership. He studied with elders and
-            makers across Europe and North America, learning to read grain, tune by ear, and trust
-            the wood to know what it wanted to be. Today he works alongside Radenko in the Rhodope
-            workshop, voicing and finishing each flute before it ships to its player.
-          </p>
-          <blockquote className="border-l-2 border-primary pl-6 font-serif text-2xl italic text-foreground/95">
-            &ldquo;A good flute doesn&apos;t play music. It plays the player. My job is to listen until
-            the wood is ready to speak.&rdquo;
-          </blockquote>
-          <p>
-            Robert holds breathwork circles, leads occasional retreats in nature, and travels to
-            events like TRYP EXPO Berlin to share the flutes with people who are looking for them.
-          </p>
+            <p>
+              Robert came to the flute later in life, after years working in code, technology, and the
+              quieter end of music. The first flute he played was a borrowed cedar instrument at a
+              breathwork circle. He didn&apos;t put it down.
+            </p>
+            <p>
+              What began as a personal practice grew into a partnership. He studied with elders and
+              makers across Europe and North America, learning to read grain, tune by ear, and trust
+              the wood to know what it wanted to be. Today he works alongside Radenko in the Rhodope
+              workshop, voicing and finishing each flute before it ships to its player.
+            </p>
+            <blockquote className="border-l-2 border-primary pl-6 font-serif text-2xl italic text-foreground/95">
+              &ldquo;A good flute doesn&apos;t play music. It plays the player. My job is to listen until
+              the wood is ready to speak.&rdquo;
+            </blockquote>
+            <p>
+              Robert holds breathwork circles, leads occasional retreats in nature, and is always seeking
+              opportunities to share the flutes with people who are looking for them.
+            </p>
 
           <div className="grid gap-4 sm:grid-cols-2 pt-2">
             {[

@@ -14,20 +14,6 @@ export type FluteEvent = {
 
 export const events: FluteEvent[] = [
   {
-    slug: "tryp-expo-berlin-2026",
-    name: "TRYP EXPO Berlin 2026",
-    date: "May 15 – 17, 2026",
-    dateISO: "2026-17-05",
-    location: "STATION Berlin",
-    city: "Berlin",
-    country: "Germany",
-    url: "https://tryp.de/",
-    description:
-      "Robert will be at TRYP EXPO Berlin — a conference at the intersection of psychedelics, science, music, and wellness. Speak with Robert to play, listen, and bring a flute home. Scan the QR code to learn more and stay in touch.",
-    type: "expo",
-    featured: true,
-  },
-  {
     slug: "rhodope-breathwork-circle",
     name: "Rhodope Breathwork Sound Circle",
     date: "Monthly · First Sunday",
