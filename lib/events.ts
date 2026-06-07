@@ -1,3 +1,5 @@
+export type FluteEventType = "expo" | "ceremony" | "workshop" | "festival"
+
 export type FluteEvent = {
   slug: string
   name: string
@@ -8,67 +10,21 @@ export type FluteEvent = {
   country: string
   url?: string
   description: string
-  type: "expo" | "ceremony" | "workshop" | "festival"
+  type: FluteEventType
   featured?: boolean
 }
 
-export const events: FluteEvent[] = [
-  {
-    slug: "tryp-expo-berlin-2026",
-    name: "TRYP EXPO Berlin 2026",
-    date: "May 15 – 17, 2026",
-    dateISO: "2026-17-05",
-    location: "STATION Berlin",
-    city: "Berlin",
-    country: "Germany",
-    url: "https://tryp.de/",
-    description:
-      "Robert will be at TRYP EXPO Berlin — a conference at the intersection of psychedelics, science, music, and wellness. Speak with Robert to play, listen, and bring a flute home. Scan the QR code to learn more and stay in touch.",
-    type: "expo",
-    featured: true,
-  },
-  {
-    slug: "rhodope-breathwork-circle",
-    name: "Rhodope Breathwork Sound Circle",
-    date: "Monthly · First Sunday",
-    dateISO: "2026-06-07",
-    location: "The Workshop",
-    city: "Smolyan",
-    country: "Bulgaria",
-    description:
-      "An open monthly gathering for breath, flute, and silence. Beginners welcome — flutes provided. Donation-based.",
-    type: "ceremony",
-  },
-  {
-    slug: "summer-flute-immersion",
-    name: "Summer Flute Immersion Retreat",
-    date: "July 12 – 15, 2026",
-    dateISO: "2026-07-12",
-    location: "Rhodope Mountains",
-    city: "Devin",
-    country: "Bulgaria",
-    description:
-      "Three days of flute play, breathwork, and quiet practice in the mountains where the flutes are born. Limited to 12 participants. Includes a custom-tuned beginner flute.",
-    type: "workshop",
-  },
-  {
-    slug: "plovdiv-sound-healing",
-    name: "Plovdiv Sound Healing Evening",
-    date: "Last Friday of every month",
-    dateISO: "2026-05-29",
-    location: "Studio Klang",
-    city: "Plovdiv",
-    country: "Bulgaria",
-    description:
-      "An evening of low-drone flute, singing bowls, and guided rest. 90 minutes. Bring a blanket.",
-    type: "ceremony",
-  },
-]
-
-export function getFeaturedEvent(): FluteEvent | undefined {
-  return events.find((e) => e.featured)
+export async function getAllEvents(): Promise<FluteEvent[]> {
+  // TODO: Implement data fetching from your preferred source
+  return []
 }
 
-export function getEventBySlug(slug: string): FluteEvent | undefined {
-  return events.find((e) => e.slug === slug)
+export async function getFeaturedEvent(): Promise<FluteEvent | null> {
+  // TODO: Implement data fetching from your preferred source
+  return null
+}
+
+export async function getEventBySlug(slug: string): Promise<FluteEvent | null> {
+  // TODO: Implement data fetching from your preferred source
+  return null
 }
