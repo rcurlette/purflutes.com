@@ -18,24 +18,33 @@ function getResend(): Resend | null {
   return new Resend(apiKey)
 }
 
+type OwnerNotificationInput = OwnerNotificationEmailProps & {
+  subject: string
+  replyTo?: string
+}
+
 /**
- * Notify the site owner about a new signup, rendered with React Email.
+ * Notify the site owner, rendered with React Email.
  * Returns silently on failure — form submissions must not be blocked by email issues.
  */
-export async function sendOwnerNotification(input: OwnerNotificationEmailProps): Promise<void> {
+export async function sendOwnerNotification({
+  subject,
+  replyTo,
+  ...templateProps
+}: OwnerNotificationInput): Promise<void> {
   const resend = getResend()
   if (!resend) return
 
   try {
-    const html = await render(OwnerNotificationEmail(input))
-    const text = await render(OwnerNotificationEmail(input), { plainText: true })
+    const html = await render(OwnerNotificationEmail(templateProps))
+    const text = await render(OwnerNotificationEmail(templateProps), { plainText: true })
     const { error } = await resend.emails.send({
       from: NOTIFICATION_FROM,
       to: NOTIFICATION_TO,
-      subject: `New signup: ${input.email}`,
+      subject,
       html,
       text,
-      replyTo: input.email,
+      replyTo,
     })
     if (error) {
       console.log("[v0] Resend owner notification error:", error.message)

@@ -39,21 +39,20 @@ export async function submitInquiry(input: unknown): Promise<InquiryResult> {
     }
 
     const email = parsed.data.email.trim().toLowerCase()
-    const fluteLabel = parsed.data.fluteName || parsed.data.fluteSlug || "-"
+    const fluteLabel = parsed.data.fluteName || parsed.data.fluteSlug || "—"
     await sendOwnerNotification({
       subject: `New inquiry from ${parsed.data.name.trim()}${parsed.data.fluteName ? ` — ${parsed.data.fluteName}` : ""}`,
       replyTo: email,
-      body: [
-        `New flute inquiry on PurFlutes`,
-        ``,
-        `Name:    ${parsed.data.name.trim()}`,
-        `Email:   ${email}`,
-        `Phone:   ${parsed.data.phone?.trim() || "-"}`,
-        `Flute:   ${fluteLabel}`,
-        ``,
-        `Message:`,
-        parsed.data.message.trim(),
-      ].join("\n"),
+      preview: `New flute inquiry from ${parsed.data.name.trim()}`,
+      title: "New flute inquiry on PurFlutes",
+      intro: "Someone is interested in a flute.",
+      rows: [
+        { label: "Name", value: parsed.data.name.trim() },
+        { label: "Email", value: email },
+        { label: "Phone", value: parsed.data.phone?.trim() || "—" },
+        { label: "Flute", value: fluteLabel },
+      ],
+      message: parsed.data.message.trim(),
     })
 
     return { ok: true }

@@ -12,37 +12,32 @@ import {
   Text,
 } from "@react-email/components"
 
+export type OwnerNotificationRow = { label: string; value: string }
+
 export type OwnerNotificationEmailProps = {
-  email: string
-  name?: string | null
-  source?: string | null
-  interests?: string | null
-  notes?: string | null
+  title: string
+  intro: string
+  preview: string
+  rows: OwnerNotificationRow[]
+  /** Optional free-form block rendered below the rows, e.g. a message body. */
+  message?: string | null
 }
 
 export function OwnerNotificationEmail({
-  email,
-  name,
-  source,
-  interests,
-  notes,
+  title,
+  intro,
+  preview,
+  rows,
+  message,
 }: OwnerNotificationEmailProps) {
-  const rows: Array<{ label: string; value: string }> = [
-    { label: "Email", value: email },
-    { label: "Name", value: name?.trim() || "—" },
-    { label: "Source", value: source?.trim() || "website" },
-    { label: "Interests", value: interests?.trim() || "—" },
-    { label: "Notes", value: notes?.trim() || "—" },
-  ]
-
   return (
     <Html>
       <Head />
-      <Preview>{`New signup: ${email}`}</Preview>
+      <Preview>{preview}</Preview>
       <Body style={body}>
         <Container style={container}>
-          <Heading style={heading}>New signup on PurFlutes</Heading>
-          <Text style={subtext}>Someone just joined the list.</Text>
+          <Heading style={heading}>{title}</Heading>
+          <Text style={subtext}>{intro}</Text>
 
           <Hr style={hr} />
 
@@ -54,6 +49,14 @@ export function OwnerNotificationEmail({
               </Row>
             ))}
           </Section>
+
+          {message ? (
+            <>
+              <Hr style={hr} />
+              <Text style={messageLabel}>Message</Text>
+              <Text style={messageBody}>{message}</Text>
+            </>
+          ) : null}
         </Container>
       </Body>
     </Html>
@@ -115,4 +118,21 @@ const valueCol: React.CSSProperties = {
   color: "#2b2118",
   fontSize: "15px",
   lineHeight: "1.5",
+}
+
+const messageLabel: React.CSSProperties = {
+  color: "#8a7d6b",
+  fontSize: "13px",
+  fontWeight: 600,
+  textTransform: "uppercase",
+  letterSpacing: "0.04em",
+  margin: "0 0 8px",
+}
+
+const messageBody: React.CSSProperties = {
+  color: "#2b2118",
+  fontSize: "15px",
+  lineHeight: "1.6",
+  margin: 0,
+  whiteSpace: "pre-wrap",
 }

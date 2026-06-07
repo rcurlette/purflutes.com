@@ -41,11 +41,18 @@ export async function submitSignup(input: unknown): Promise<SignupResult> {
 
     await Promise.allSettled([
       sendOwnerNotification({
-        email,
-        name,
-        source: parsed.data.source || "website",
-        interests: parsed.data.interests?.trim() || null,
-        notes: parsed.data.notes?.trim() || null,
+        subject: `New signup: ${email}`,
+        replyTo: email,
+        preview: `New signup: ${email}`,
+        title: "New signup on PurFlutes",
+        intro: "Someone just joined the list.",
+        rows: [
+          { label: "Email", value: email },
+          { label: "Name", value: name || "—" },
+          { label: "Source", value: parsed.data.source || "website" },
+          { label: "Interests", value: parsed.data.interests?.trim() || "—" },
+          { label: "Notes", value: parsed.data.notes?.trim() || "—" },
+        ],
       }),
       sendWelcomeEmail(email, name),
     ])
