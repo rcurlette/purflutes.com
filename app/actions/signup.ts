@@ -2,7 +2,7 @@
 
 import { z } from "zod"
 import { getSupabaseServerClient } from "@/lib/supabase/server"
-import { sendOwnerNotification } from "@/lib/email"
+import { sendOwnerNotification, sendWelcomeEmail } from "@/lib/email"
 
 const signupSchema = z.object({
   email: z.string().email("Please enter a valid email address."),
@@ -37,19 +37,18 @@ export async function submitSignup(input: unknown): Promise<SignupResult> {
     }
 
     const email = parsed.data.email.trim().toLowerCase()
-    await sendOwnerNotification({
-      subject: `New signup: ${email}`,
-      replyTo: email,
-      body: [
-        `New signup on PurFlutes`,
-        ``,
-        `Email:      ${email}`,
-        `Name:       ${parsed.data.name?.trim() || "-"}`,
-        `Source:     ${parsed.data.source || "website"}`,
-        `Interests:  ${parsed.data.interests?.trim() || "-"}`,
-        `Notes:      ${parsed.data.notes?.trim() || "-"}`,
-      ].join("\n"),
-    })
+    const name = parsed.data.name?.trim() || null
+
+    await Promise.allSettled([
+      sendOwnerNotification({
+        email,
+        name,
+        source: parsed.data.source || "website",
+        interests: parsed.data.interests?.trim() || null,
+        notes: parsed.data.notes?.trim() || null,
+      }),
+      sendWelcomeEmail(email, name),
+    ])
 
     return { ok: true }
   } catch (err) {
