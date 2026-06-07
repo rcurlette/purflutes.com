@@ -141,7 +141,7 @@ export default async function HomePage() {
           <div className="max-w-3xl">
             <p className="text-xs font-semibold uppercase tracking-widest text-primary">The Makers</p>
             <h2 className="mt-2 font-serif text-4xl text-balance text-foreground sm:text-5xl">
-              Two hands, two mountains, one breath.
+              Two hands, one mountains, one breath.
             </h2>
             <p className="mt-6 max-w-prose leading-relaxed text-foreground/85">
               Every PūR Flute is carved by hand in the Bulgarian Rhodope mountains. Radenko shapes
