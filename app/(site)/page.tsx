@@ -44,9 +44,6 @@ export default async function HomePage() {
                 <ArrowRight className="ml-1 h-4 w-4" aria-hidden="true" />
               </Link>
             </Button>
-            <Button asChild size="lg" variant="outline" className="font-medium">
-              <Link href="/tryp">Meet us at TRYP Berlin</Link>
-            </Button>
           </div>
         </div>
       </section>
