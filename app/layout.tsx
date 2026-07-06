@@ -47,7 +47,7 @@ export const metadata: Metadata = {
 }
 
 export const viewport: Viewport = {
-  themeColor: "#1a1a2e",
+  themeColor: "#faf6ef",
 }
 
 export default function RootLayout({
@@ -56,7 +56,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`dark bg-background ${geist.variable} ${cormorant.variable}`}>
+    <html lang="en" className={`bg-background ${geist.variable} ${cormorant.variable}`}>
       <body className="font-sans antialiased min-h-screen flex flex-col">
         {children}
         <Toaster richColors position="top-center" />

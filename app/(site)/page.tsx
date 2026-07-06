@@ -23,7 +23,7 @@ export default async function HomePage() {
             className="object-cover object-center"
             sizes="100vw"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/40 to-background" />
+          <div className="absolute inset-0 bg-gradient-to-b from-background/75 via-background/70 to-background" />
         </div>
         <div className="mx-auto flex w-full max-w-7xl flex-col items-center px-4 py-24 text-center sm:px-6 sm:py-32 lg:px-8 lg:py-44">
           <p className="font-serif text-sm uppercase tracking-[0.3em] text-primary/90">
