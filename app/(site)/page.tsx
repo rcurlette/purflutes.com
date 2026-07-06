@@ -1,6 +1,6 @@
 import Link from "next/link"
 import Image from "next/image"
-import { ArrowRight, Wind, Heart, Sparkles } from "lucide-react"
+import { ArrowRight, Wind, Heart, Sparkles, Waves, Moon } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { FluteCard } from "@/components/site/flute-card"
 import { SignupForm } from "@/components/site/signup-form"
@@ -84,6 +84,99 @@ export default async function HomePage() {
           {featuredFlutes.map((flute) => (
             <FluteCard key={flute.slug} flute={flute} />
           ))}
+        </div>
+      </section>
+
+      {/* Who these flutes are for */}
+      <section className="border-t border-border/40 bg-background">
+        <div className="mx-auto w-full max-w-7xl px-4 py-20 sm:px-6 sm:py-24 lg:px-8">
+          <div className="max-w-2xl">
+            <p className="text-xs font-semibold uppercase tracking-widest text-primary">Find your flute</p>
+            <h2 className="mt-2 font-serif text-4xl text-balance text-foreground sm:text-5xl">
+              A voice for every practice.
+            </h2>
+            <p className="mt-6 max-w-prose leading-relaxed text-foreground/85">
+              However you come to the flute, there&apos;s one shaped for the sound you&apos;re
+              chasing. Two paths people most often walk with us.
+            </p>
+          </div>
+
+          <div className="mt-12 grid gap-6 md:grid-cols-2 md:gap-8">
+            {/* Sound Healers */}
+            <article className="flex flex-col rounded-lg border border-border/60 bg-card p-8 sm:p-10">
+              <span className="flex h-12 w-12 items-center justify-center rounded-md bg-primary/10 text-primary">
+                <Waves className="h-6 w-6" aria-hidden="true" />
+              </span>
+              <h3 className="mt-6 font-serif text-2xl text-foreground sm:text-3xl">
+                Flutes for Sound Healers
+              </h3>
+              <p className="mt-4 leading-relaxed text-foreground/85">
+                Built for practitioners who work with tone as medicine. Each flute is tuned to a
+                clear, grounded key that sits well alongside bowls, drums, and voice — with warm
+                low registers and an even breath response that holds steady through long journeys
+                and sessions.
+              </p>
+              <ul className="mt-6 space-y-2 text-sm text-foreground/80">
+                <li className="flex items-start gap-2">
+                  <Sparkles className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden="true" />
+                  Consistent tuning for layering with other instruments
+                </li>
+                <li className="flex items-start gap-2">
+                  <Sparkles className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden="true" />
+                  Deep, resonant keys that carry a room
+                </li>
+                <li className="flex items-start gap-2">
+                  <Sparkles className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden="true" />
+                  Reliable breath response for extended playing
+                </li>
+              </ul>
+              <div className="mt-8">
+                <Button asChild variant="link" className="px-0 text-primary">
+                  <Link href="/shop">
+                    Browse healing flutes
+                    <ArrowRight className="ml-1 h-4 w-4" aria-hidden="true" />
+                  </Link>
+                </Button>
+              </div>
+            </article>
+
+            {/* Relaxing */}
+            <article className="flex flex-col rounded-lg border border-border/60 bg-card p-8 sm:p-10">
+              <span className="flex h-12 w-12 items-center justify-center rounded-md bg-primary/10 text-primary">
+                <Moon className="h-6 w-6" aria-hidden="true" />
+              </span>
+              <h3 className="mt-6 font-serif text-2xl text-foreground sm:text-3xl">
+                Flutes for Relaxing
+              </h3>
+              <p className="mt-4 leading-relaxed text-foreground/85">
+                For quiet evenings, meditation, and simply slowing down. These flutes are forgiving
+                and easy to play — no experience needed. A soft breath is all it takes to fill the
+                room with a calm, meditative tone that helps you unwind and come back to yourself.
+              </p>
+              <ul className="mt-6 space-y-2 text-sm text-foreground/80">
+                <li className="flex items-start gap-2">
+                  <Sparkles className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden="true" />
+                  Beginner-friendly and effortless to play
+                </li>
+                <li className="flex items-start gap-2">
+                  <Sparkles className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden="true" />
+                  Gentle, soothing tones for winding down
+                </li>
+                <li className="flex items-start gap-2">
+                  <Sparkles className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden="true" />
+                  A calming daily ritual for breath and rest
+                </li>
+              </ul>
+              <div className="mt-8">
+                <Button asChild variant="link" className="px-0 text-primary">
+                  <Link href="/shop">
+                    Browse relaxing flutes
+                    <ArrowRight className="ml-1 h-4 w-4" aria-hidden="true" />
+                  </Link>
+                </Button>
+              </div>
+            </article>
+          </div>
         </div>
       </section>
 
